@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AcademyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Classroom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Groups" Relationship="Self.Group_fk0" FromRole="Classroom" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PositionID" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Speciality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Position" Relationship="Self.Employee_fk0" FromRole="Employee" ToRole="Position" />
+    <NavigationProperty Name="Groups" Relationship="Self.Group_fk2" FromRole="Employee" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="TaskID" Type="Int32" Nullable="false" />
+    <Property Name="Point" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Task" Relationship="Self.Exam_fk0" FromRole="Exam" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClassroomID" Type="Int32" Nullable="false" />
+    <Property Name="TeacherID" Type="Int32" Nullable="false" />
+    <Property Name="MentorID" Type="Int32" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="ProgramID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Classroom" Relationship="Self.Group_fk0" FromRole="Group" ToRole="Classroom" />
+    <NavigationProperty Name="Employee" Relationship="Self.Group_fk2" FromRole="Group" ToRole="Employee" />
+    <NavigationProperty Name="Program" Relationship="Self.Group_fk1" FromRole="Group" ToRole="Program" />
+    <NavigationProperty Name="Students" Relationship="Self.Student_fk0" FromRole="Group" ToRole="Student" />
+    <NavigationProperty Name="Tasks" Relationship="Self.Task_fk0" FromRole="Group" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="photo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="info1" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.Employee_fk0" FromRole="Position" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Period" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Groups" Relationship="Self.Group_fk1" FromRole="Program" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fee" Type="Double" Nullable="false" />
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="Self.Student_fk0" FromRole="Student" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dedline" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Exams" Relationship="Self.Exam_fk0" FromRole="Task" ToRole="Exam" />
+    <NavigationProperty Name="Group" Relationship="Self.Task_fk0" FromRole="Task" ToRole="Group" />
+  </EntityType>
+  <Association Name="Group_fk0">
+    <End Role="Classroom" Type="Self.Classroom" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="ClassroomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Employee_fk0">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="PositionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Group_fk2">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Exam_fk0">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="TaskID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Group_fk1">
+    <End Role="Program" Type="Self.Program" Multiplicity="1" />
+    <End Role="Group" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="ProgramID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Student_fk0">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Task_fk0">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classrooms" EntityType="Self.Classroom" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Exams" EntityType="Self.Exam" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Infoes" EntityType="Self.Info" />
+    <EntitySet Name="Positions" EntityType="Self.Position" />
+    <EntitySet Name="Programs" EntityType="Self.Program" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <AssociationSet Name="Group_fk0" Association="Self.Group_fk0">
+      <End Role="Classroom" EntitySet="Classrooms" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="Employee_fk0" Association="Self.Employee_fk0">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="Group_fk2" Association="Self.Group_fk2">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="Exam_fk0" Association="Self.Exam_fk0">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="Exam" EntitySet="Exams" />
+    </AssociationSet>
+    <AssociationSet Name="Group_fk1" Association="Self.Group_fk1">
+      <End Role="Program" EntitySet="Programs" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="Student_fk0" Association="Self.Student_fk0">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="Task_fk0" Association="Self.Task_fk0">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
